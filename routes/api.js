@@ -2,10 +2,18 @@ const express = require('express');
 const router = express.Router(); //we are storing/mounting route handlers onto our router object
 const Ninja = require('../models/ninja');
 
-// get list of ninjas from db
 router.get('/ninjas',function(req,res,next){
-  res.send({type:'GET'});
+//   Ninja.find({}).then(function(ninjas){  //find ALL ninjas by passing in empty object, once complete, use callback function to return ninjas found.
+//     res.send(ninas); //send ninjas to the user(client)
+//   })
+  Ninja.geoNear(
+    {type:'Point', coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)]},
+    {maxDistance: 1000000, spherical:true}
+  ).then(function(ninjas){
+    res.send(ninjas);
+  });
 });
+
 
 //add new ninja to db
 router.post('/ninjas',function(req,res,next){

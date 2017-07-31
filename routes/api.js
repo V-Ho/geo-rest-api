@@ -8,7 +8,7 @@ router.get('/ninjas',function(req,res,next){
 //   })
   Ninja.geoNear(
     {type:'Point', coordinates: [parseFloat(req.query.lng), parseFloat(req.query.lat)]},
-    {maxDistance: 1000000, spherical:true}
+    {maxDistance: 100000000, spherical:true}
   ).then(function(ninjas){
     res.send(ninjas);
   });

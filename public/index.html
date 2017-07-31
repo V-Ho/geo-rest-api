@@ -19,5 +19,67 @@
   <!-- //contains react core library to create react library -->
   <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
   <!-- //interacts and places react components onto DOM -->
+
+<!-- Create React Components -->
+<!-- When user click the form, we want to return list of ninjas within <ul>
+-retrieve input values lat and long
+-get request to get handler that includes query string, passing through lng and lat variables submitted from form
+-return JSON data
+
+</ul> -->
+  <script type="text/babel"
+
+
+
+  var Ninjas = React.createClass({
+    getInitialState:function(){
+      return({
+        ninjas:[]
+      });
+    },
+    render:function(){
+      var ninjas = this.state.ninjas
+      ninas = ninas.map(function(ninja,index){
+        return(
+          <li key={index}>
+          <span className={ninja.obj.available}></span>
+          <span className="name">{ninja.obj.name}</span>
+          <span className="rank">{ninja.obj.rank}</span>
+          <span className="dist">{Math.floor(ninja.dis / 1000)}km</span>
+          </li>
+        );
+      });
+      return(
+        <div id="ninja-container">
+        <form id="search" onSubmit={this.handleSubmit}>
+          <label>Enter your latitude:</label>
+          <input type="text" ref="lat" placeholder="latitude" required />
+          <label> Enter your longitude:</label>
+          <input type="text" ref="lng" placeholder="longitude" required />
+          <input type="submit" value="Find Ninjas" />
+        </form>
+        <ul>
+          {ninjas}
+        </ul>
+        </div>
+      );
+    },
+    handleSubmit:function(e){
+      e.preventDefault();
+      var lng - this.refs.lng.value;
+      var lat = this.refs.lat.value;
+
+      fetch('/api/ninjas?lng='+lng+'&lat='+lat).then(function(data){
+        return data.json();
+      }).then(json =>) {
+        this.setState({
+          ninjas:json
+        });
+      };
+    }
+  });
+
+  ReactDOM.render(<Ninjas/>,document.getElementbyId('ninjas'));
+  </script>
   </body>
 </html>

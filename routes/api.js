@@ -20,7 +20,6 @@ router.post('/ninjas',function(req,res,next){
   Ninja.create(req.body).then(function(ninja) {
     res.send(ninja);
   }).catch();//recieve post request with JSON data attached to body of request. creating new instance of Ninja by passing through data sent in req.body, then saving it to db. Returns promise
-
   });
 
 //update a ninja in db
@@ -46,9 +45,9 @@ module.exports = router;
 //   console.log('GET request');
 //   res.send({name:'Yoshi'});
 // });
-// // app.get'/' listens for GET requests to localhost:4000/
-// // responds to GET request with callback function(){}, passing in req & res parameters
-// // req: contains info about request made
-// // res: contains info about response (status code, send data etc. ).
-// // res.end ends response so browser no longer waiting for response
+// app.get'/' listens for GET requests to localhost:4000/
+// responds to GET request with callback function(){}, passing in req & res parameters
+// req: contains info about request made
+// res: contains info about response (status code, send data etc. ).
+// res.end ends response so browser no longer waiting for response
 //
